@@ -1,0 +1,46 @@
+{
+  "family": "chatbot-frontend",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "executionRoleArn": "arn:aws:iam::075610007429:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::075610007429:role/ecsAppRole",
+  "containerDefinitions": [
+    {
+      "name": "chatbot-frontend",
+      "image": "075610007429.dkr.ecr.us-east-1.amazonaws.com/chatbot-frontend:v1",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        { "name": "NODE_ENV", "value": "production" },
+        { "name": "FASTAPI_VOICE_BASE_URL", "value": "https://api.<DOMAIN>" },
+        { "name": "NEXT_PUBLIC_FASTAPI_VOICE_WS_URL", "value": "wss://api.<DOMAIN>/agent/ws" },
+        { "name": "DARSHAN_AI_BASE_URL", "value": "http://religious-bot.internal:8000" },
+        { "name": "TEKURIOUS_AI_BASE_URL", "value": "http://education-bot.internal:8002" },
+        { "name": "EDUTHUM_BASE_URL", "value": "http://education-bot.internal:8002" },
+        { "name": "FASTAPI_TENANT_ID", "value": "tenant-demo" }
+      ],
+      "healthCheck": {
+        "command": ["CMD-SHELL", "node -e \"fetch('http://127.0.0.1:3000').then(()=>process.exit(0)).catch(()=>process.exit(1))\""],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 40
+      },
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/chatbot-frontend",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}

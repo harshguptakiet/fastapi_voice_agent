@@ -1,0 +1,54 @@
+{
+  "family": "fastapi-server",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "executionRoleArn": "arn:aws:iam::075610007429:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::075610007429:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "fastapi-server",
+      "image": "075610007429.dkr.ecr.us-east-1.amazonaws.com/fastapi-server:v1",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8001,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        { "name": "ENV", "value": "prod" },
+        { "name": "LLM_PROVIDER", "value": "gemini" },
+        { "name": "GEMINI_MODEL", "value": "google/gemini-flash" },
+        { "name": "USE_DEEPGRAM_ELEVENLABS", "value": "true" },
+        { "name": "ELEVENLABS_VOICE_ID", "value": "hpp4J3VqNfWAUOO0d1Us" },
+        { "name": "ELEVENLABS_MODEL_ID", "value": "elevenlabs/flash-v2.5" },
+        { "name": "DATABASE_URL", "value": "sqlite:///./storage/bot.db" },
+        { "name": "QDRANT_URL", "value": "https://37062d62-1541-46e2-b950-d0276799ffa7.us-east-1-1.aws.cloud.qdrant.io:6333" },
+        { "name": "REDIS_URL", "value": "rediss://default:NCKU4ilH8fT65ALZbm2yGe7T9djhkXb0@redis-12523.c326.us-east-1-3.ec2.cloud.redislabs.com:12523/0" }
+      ],
+      "secrets": [
+        { "name": "GEMINI_API_KEY", "valueFrom": "arn:aws:secretsmanager:us-east-1:075610007429:secret:gemini-api-key" },
+        { "name": "DEEPGRAM_API_KEY", "valueFrom": "arn:aws:secretsmanager:us-east-1:075610007429:secret:deepgram-api-key" },
+        { "name": "ELEVENLABS_API_KEY", "valueFrom": "arn:aws:secretsmanager:us-east-1:075610007429:secret:elevenlabs-api-key" }
+      ],
+      "healthCheck": {
+        "command": ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/health')\" || exit 1"],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 30
+      },
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/fastapi-server",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}
+

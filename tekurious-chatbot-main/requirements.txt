@@ -1,0 +1,3 @@
+# Render compatibility (monorepo): backend deps
+# Lets Render run: pip install -r requirements.txt from repo root
+-r bots/religious-ai/src/requirements.txt

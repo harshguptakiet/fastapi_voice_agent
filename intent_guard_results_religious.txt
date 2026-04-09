@@ -1,0 +1,45 @@
+Prompt: Tell me about Gita.
+Response: None
+Time: 2.18s
+Prompt: What is the significance of Ramayana?
+Response: None
+Time: 0.54s
+Prompt: Explain the concept of karma.
+Response: None
+Time: 1.79s
+Prompt: Who is Krishna?
+Response: None
+Time: 1.64s
+Prompt: What is a mantra?
+Response: None
+Time: 1.50s
+Prompt: Describe the festival of Diwali.
+Response: None
+Time: 2.30s
+Prompt: What is dharma?
+Response: None
+Time: 1.69s
+Prompt: Tell me about Hanuman.
+Response: None
+Time: 1.84s
+Prompt: What is the meaning of moksha?
+Response: None
+Time: 1.60s
+Prompt: Explain the story of Mahabharat.
+Response: None
+Time: 2.12s
+Prompt: What is bhakti yoga?
+Response: None
+Time: 1.63s
+Prompt: Who is Shiva?
+Response: None
+Time: 1.86s
+Prompt: What is the Upanishad?
+Response: None
+Time: 1.94s
+Prompt: What is a temple?
+Response: None
+Time: 1.54s
+Prompt: What is puja?
+Response: None
+Time: 1.83s

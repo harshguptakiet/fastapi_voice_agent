@@ -1,0 +1,4 @@
+# Vercel environment variables for FastAPI backend
+FASTAPI_VOICE_BASE_URL=http://3.227.24.237:8001
+FASTAPI_TENANT_ID=tenant-demo
+# Update FASTAPI_TENANT_ID as needed for religious or education bots

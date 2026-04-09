@@ -1,0 +1,45 @@
+Prompt: Explain the Pythagorean theorem.
+Response: None
+Time: 1.81s
+Prompt: What is a circle?
+Response: None
+Time: 0.56s
+Prompt: Teach me about algebra.
+Response: None
+Time: 1.77s
+Prompt: What is the law of gravity?
+Response: None
+Time: 0.57s
+Prompt: Summarize the French Revolution.
+Response: None
+Time: 1.98s
+Prompt: What is an integral?
+Response: None
+Time: 1.46s
+Prompt: Explain the process of photosynthesis.
+Response: None
+Time: 1.94s
+Prompt: What is a chemical reaction?
+Response: None
+Time: 0.55s
+Prompt: Describe the structure of an atom.
+Response: None
+Time: 0.54s
+Prompt: What is trigonometry?
+Response: None
+Time: 1.50s
+Prompt: Who was Newton?
+Response: None
+Time: 0.54s
+Prompt: What is a noun?
+Response: None
+Time: 0.55s
+Prompt: Explain the water cycle.
+Response: None
+Time: 2.03s
+Prompt: What is a democracy?
+Response: None
+Time: 0.55s
+Prompt: What is a cell in biology?
+Response: None
+Time: 1.77s

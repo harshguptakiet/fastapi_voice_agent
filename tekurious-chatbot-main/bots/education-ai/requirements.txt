@@ -1,0 +1,2 @@
+# Render compatibility: allow "pip install -r requirements.txt" from tekurious-darshan-ai/
+-r src/requirements.txt

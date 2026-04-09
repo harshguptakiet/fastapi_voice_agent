@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+
+# Virtualenv
+.venv/
+venv/
+
+# Env files
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+.env.local
+.env.local.*
+!.env.local.example
+!.env.local.*.example
+
+# Logs / runtime artifacts
+logs/
+src/runtime/logs/
+
+# OS
+.DS_Store

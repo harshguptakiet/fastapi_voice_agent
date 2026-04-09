@@ -1,0 +1,42 @@
+{
+  "family": "education-bot",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "executionRoleArn": "arn:aws:iam::075610007429:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::075610007429:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "education-bot",
+      "image": "075610007429.dkr.ecr.us-east-1.amazonaws.com/education-bot:v1",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8002,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        { "name": "PORT", "value": "8002" },
+        { "name": "UVICORN_RELOAD", "value": "0" }
+      ],
+      "healthCheck": {
+        "command": ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:8002/health')\" || exit 1"],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 30
+      },
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/education-bot",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}
+

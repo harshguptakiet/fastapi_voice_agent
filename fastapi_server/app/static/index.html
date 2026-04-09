@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Voice Agent Console</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-shape bg-shape-a"></div>
+  <div class="bg-shape bg-shape-b"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <div>
+        <h1>Voice Agent Console</h1>
+        <p>Full pipeline tester: text-to-voice and voice-to-voice</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button id="btnHealth" class="btn btn-ghost">Check Health</button>
+      <span id="healthBadge" class="pill">status: unknown</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="panel controls" aria-label="Configuration">
+      <h2>Controls</h2>
+
+      <label>Base URL (auto)
+        <input id="baseUrl" type="text" value="http://127.0.0.1:8010" readonly />
+      </label>
+
+      <label>Tenant ID
+        <input id="tenantId" type="text" value="tenant-demo" />
+      </label>
+
+      <label>Agent (guardrail domain)
+        <select id="agentDomain">
+          <option value="religious" selected>Religious AI</option>
+          <option value="education">Education AI</option>
+        </select>
+      </label>
+
+      <label>Session ID
+        <input id="sessionId" type="text" value="chat-live-1" />
+      </label>
+
+      <label>Mode
+        <select id="mode">
+          <option value="text">Text to Voice</option>
+          <option value="voice">Voice to Voice</option>
+        </select>
+      </label>
+
+      <label>Language
+        <select id="language">
+          <option value="en-US" selected>English (US)</option>
+          <option value="en-IN">English (India)</option>
+          <option value="hi-IN">Hindi</option>
+        </select>
+      </label>
+
+      <label>LLM Provider
+        <select id="provider">
+          <option value="gemini" selected>Gemini</option>
+          <option value="openai">OpenAI</option>
+          <option value="anthropic">Anthropic</option>
+          <option value="dummy">Dummy</option>
+        </select>
+      </label>
+
+      <label>LLM Model
+        <input id="llmModel" type="text" placeholder="optional override" />
+      </label>
+
+      <label>TTS Voice
+        <input id="ttsVoice" type="text" placeholder="optional voice id" />
+      </label>
+
+      <div class="two-col">
+        <label>TTS Format
+          <select id="ttsFormat">
+            <option value="">default</option>
+            <option value="mp3_44100_128" selected>mp3_44100_128</option>
+            <option value="pcm_16000">pcm_16000</option>
+          </select>
+        </label>
+
+        <label>Emotion
+          <select id="ttsEmotion">
+            <option value="">default</option>
+            <option value="calm" selected>calm</option>
+            <option value="excited">excited</option>
+            <option value="empathetic">empathetic</option>
+            <option value="confident">confident</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="check-row">
+        <label><input id="useKnowledge" type="checkbox" checked /> Use knowledge</label>
+        <label><input id="outputAudio" type="checkbox" /> Output audio (TTS)</label>
+      </div>
+
+      <label>Knowledge Top-K
+        <input id="knowledgeTopK" type="number" min="1" max="10" value="3" />
+      </label>
+
+      <label>Access Level
+        <input id="accessLevel" type="text" placeholder="optional" />
+      </label>
+
+      <div class="hint">
+        Voice mode records from your microphone and sends raw PCM16 audio through the same
+        <code>/agent/stream</code> pipeline.
+      </div>
+
+      <div class="status-board" aria-label="Working status">
+        <h2>Working Status</h2>
+        <div class="status-grid">
+          <div class="status-item">
+            <span>API Health</span>
+            <span id="statusHealth" class="status-chip status-unknown">Unknown</span>
+          </div>
+          <div class="status-item">
+            <span>Streaming</span>
+            <span id="statusStream" class="status-chip status-unknown">Idle</span>
+          </div>
+          <div class="status-item">
+            <span>Microphone</span>
+            <span id="statusMic" class="status-chip status-unknown">Idle</span>
+          </div>
+          <div class="status-item">
+            <span>Audio Playback</span>
+            <span id="statusAudio" class="status-chip status-unknown">Idle</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <section class="panel chat-panel" aria-label="Chat">
+      <div id="chat" class="chat" role="log" aria-live="polite"></div>
+
+      <div class="composer">
+        <input id="messageInput" type="text" placeholder="Type a message..." />
+        <button id="btnSend" class="btn">Send</button>
+      </div>
+
+      <div class="voice-row">
+        <button id="micButton" class="mic-button" aria-label="Toggle microphone">
+          <span class="mic-core"></span>
+        </button>
+        <div class="voice-status">
+          <strong id="voiceState">Mic idle</strong>
+          <small id="voiceDetail">Round button starts/stops recording for voice-to-voice</small>
+        </div>
+      </div>
+
+      <div id="metrics" class="metrics"></div>
+    </section>
+
+    <aside class="panel logs" aria-label="Pipeline events">
+      <h2>Pipeline Events</h2>
+      <pre id="eventLog"></pre>
+      <audio id="audioPlayer" controls preload="none"></audio>
+    </aside>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

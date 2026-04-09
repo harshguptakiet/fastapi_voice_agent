@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: religious-ai-backend
+    runtime: python
+    rootDir: bots/religious-ai
+    plan: free
+    autoDeployTrigger: commit
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.11
+      - key: LLM_PROVIDER
+        value: gemini
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: models/gemini-2.0-flash
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+    buildCommand: pip install -r requirements.txt
+    startCommand: APP_DIR=src; if [ -d bots/religious-ai/src ]; then APP_DIR=bots/religious-ai/src; fi; uvicorn server.main:app --app-dir $APP_DIR --host 0.0.0.0 --port $PORT
+    healthCheckPath: /docs

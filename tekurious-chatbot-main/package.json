@@ -1,0 +1,10 @@
+{
+  "name": "tekurious-chatbot-monorepo",
+  "private": true,
+  "description": "Root deps satisfy Vercel Next.js detection. The app installs under tekurious-chatbot-ui/.",
+  "dependencies": {
+    "next": "15.4.10",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  }
+}

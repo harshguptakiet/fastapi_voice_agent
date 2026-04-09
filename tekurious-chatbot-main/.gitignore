@@ -1,0 +1,39 @@
+# Secrets / env files
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+.env.local
+.env.local.*
+!.env.local.example
+!.env.local.*.example
+
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/.venv/
+**/venv/
+
+# Node / Next.js
+**/node_modules/
+**/.next/
+**/out/
+**/dist/
+**/.turbo/
+**/.vercel/
+
+# Logs / runtime
+*.log
+tekurious-darshan-ai/**/logs/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# VS Code (keep shared workspace config; ignore personal)
+.vscode/*.log
+.vercel
